@@ -1,0 +1,25 @@
+﻿<div class="panel">
+    <div ng-if="(vcl.PIC_PATH_2)" class="div">
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-5 col-lg-offset-7">
+                <ul name="imgs" id="imgs" style="margin-top: 0px; margin-bottom: 0px;">
+                    <li style="display: inline;" class="active">
+                        <a href="#" ng-click="getImg(1)"> 
+                        <i class="fa fa-camera-retro fa-xs">&nbsp; </i></a>
+                    </li>
+                    <li style="display: inline;"><a href="#" ng-click="getImg(2)">
+                        <i class="fa fa-camera-retro fa-xs">     </i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <img id="viewer" ng-src="{{vcl.PIC_PATH}}" alt="Cinque Terre" width="170" height="125" style="margin-top: 0px; margin-bottom: 0px;margin-left: 0px;margin-right: 5px;" class="pull-left img-rounded">
+            </div>
+        </div>
+    </div>
+    <div ng-if="(!vcl.PIC_PATH_2)" class="div">
+        <img id="viewer" ng-src="{{vcl.PIC_PATH}}" alt="Cinque Terre" width="170" height="125" style="margin-top: 0px; margin-bottom: 0px;margin-left: 20px;margin-right: 0px;" class="img-rounded">
+    </div>
+</div>

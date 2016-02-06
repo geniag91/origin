@@ -1,0 +1,56 @@
+﻿
+extends layout
+ 
+
+block content
+    .div( id="divAng" ng-controller="HomeController")
+        <my-navbar></my-navbar>
+
+        .container-fluid
+            h3.h3 Vehicle Search
+            h4.h4 Please fill in the search fields
+            br
+        .panel.panel-info(style='max-width: 900px;margin-top: 3px;margin-bottom: 10px;margin-left: 10px;margin-right: 10px;' )
+            form(id='formVclSearch' role='form'  name=""  style='max-width: 600px;margin-top: 10px;margin-bottom: 10px;margin-left: 10px;margin-right: 10px;')
+                #datepicker.input-daterange.input-group
+                    .row
+                        .col-xs-6.col-sm-3.col-md-3.col-lg-3
+                            #datepicker1.input-daterange.input-group
+                                input#dateFrom.input-sm.form-control(type='text', name='dateFrom', placeholder='From Date', required ='required')
+                                span.input-group-addon.glyphicon.glyphicon-calendar
+                        .col-xs-6.col-sm-3.col-md-3.col-lg-3
+                            select.selectpicker.form-control(id='hourFrom', name='hourFrom' ng-options='hr for hr in data.hrs track by hr' ng-model='data.selectedHr')
+                        .col-xs-6.col-sm-3.col-md-3.col-lg-3
+                            #datepicker2.input-daterange.input-group
+                                input#dateTo.input-sm.form-control(type='text', name='dateTo', placeholder='To Date', required ='required')
+                                span.input-group-addon.glyphicon.glyphicon-calendar
+                        .col-xs-6.col-sm-3.col-md-3.col-lg-3
+                            select.selectpicker.form-control(id='hourTo', name='hourTo'  ng-options='hr2 for hr2 in data.hrs track by hr2' ng-model='data.selectedHr2')
+
+                    br
+                    .row
+                        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                            select.selectpicker.form-control(id='locationFrom', name='locationFrom' ng-options='loc.Name for loc in data.locations track by loc.Name' ng-model='data.selectedLoc')
+
+
+                        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                            select.selectpicker.form-control(id='locationTo' ,name="locationTo" ng-options='loc2.Name for loc2 in data.locations track by loc2.Name' ng-model='data.selectedLoc2')
+
+                    br
+                    .row
+                        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                            select.selectpicker.form-control(id='age', name='age' ng-options='age for age in data.ages track by age' ng-model='data.selectedAge')
+
+                        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                            select.selectpicker.form-control(id='category',name='category' ng-options='cat for cat in data.categories track by cat' ng-model='data.selectedCat')
+
+                    br
+                    a(href='/vclList?' ) 
+                        button#submit.btn.btn-default(type="button") Submit
+ 
+                    &nbsp;
+                    a(href='/')
+                        button.btn.btn-primary(type="button") Cancel
+                br
+                #messages.textarea(readonly='readonly', rows='5', cols='100')= info
+

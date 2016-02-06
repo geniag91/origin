@@ -1,0 +1,50 @@
+﻿extends layout
+
+block content
+
+    .div(ng-controller="HistoryController")
+        <my-navbar></my-navbar>
+        .container-fluids
+
+            form(id='myOrders', role='form',  name="", style='max-width: 900px;')
+            
+                    .row(ng-repeat="ordr in data.orders")
+                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                            .panel-default
+                                .panel-default
+                                    .panel-body  Order Number: 
+                                        &nbsp;
+                                        span.badge {{ordr._id}}
+                                        .row
+                                            .col-xs-8.col-sm-8.col-md-8.col-lg-8
+                                            
+                                                ul( style="list-style-type: none; margin-top: 1px;margin-bottom: 1px;color: white;")
+                                                    li(style="margin-top: 1px;margin-bottom: 1px;")   
+                                                        | &nbsp; From Date: &nbsp;
+                                                        span.badge {{ordr.dateOut | date:'MM/dd/yyyy'}}
+                                                        | &nbsp; To Date: &nbsp;
+                                                        span.badge {{ordr.dateIn | date:'MM/dd/yyyy'}} 
+                                                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                                                        | &nbsp; From: &nbsp;
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        span.badge {{ordr.locationOut}}
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        | &nbsp; To: 
+                                                        &nbsp;
+                                                        span.badge {{ordr.locationIn}}
+                                                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                                            .col-xs-4.col-sm-4.col-md-4.col-lg-4
+                                                a(href='/order/selected?id='+ "{{ordr._id}}" ,rel="{{ordr._id}}") 
+                                                    &nbsp;&nbsp;
+                                                    button.btn.btn-info.btn-sm(class="order"  type="button"  style="float: right") 
+                                                        .div(ng-if="(laterThanNow(ordr.dateOut))")
+                                                            |View - Edit Order Details
+                                                        .div(ng-if="!(laterThanNow(ordr.dateOut))")
+                                                            |View Order Details 
+
+
+                                                .block.badge(class="priceLabel", style="float: right") {{ordr.vehiclePrice}} ₪
+                                            
+
+    script(src='http://code.jquery.com/jquery.js')
+    script(type='text/javascript' src='/js/history.js')

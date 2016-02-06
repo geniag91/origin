@@ -1,0 +1,72 @@
+﻿extends layout
+block content
+    panel
+        .panel-info
+            .panel-heading(style="color: blue;")
+                |Vehicle Details
+                |#{vcl.MAKER} #{vcl.MODEL} #{vcl.YEAR} #{vcl.ENGINE} #{vcl.ENGINE_TYPE} 
+                            
+            .panel-body(style="color: black;")
+                ul( style="list-style-type: none; margin-top: 1px;margin-bottom: 1px;")
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Category  
+                        span.badge #{vcl.CAR_CATEGORY}
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Fuel  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        span.badge #{vcl.FUEL_TYPE=='G' ? 'GAS' : 'DIESEL'} 
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Gear  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        span.badge #{vcl.GEAR}
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Doors &nbsp;&nbsp;&nbsp;&nbsp;  
+                        span.badge   #{vcl.DOORS}
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Additional Details: Air Conditioner- 
+                        span.badge(style="margin-top: 0px; margin-bottom: 3px;") #{vcl.AIR_COND==1 ? 'Yes' : 'No'}
+    br
+    panel
+        .panel-info
+            .panel-heading(style="color: blue;")       
+                |Location and Date:
+            .panel-body(style="color: black;")
+                ul( style="list-style-type: none; margin-top: 1px;margin-bottom: 1px;")
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Pickup Station 
+                        span.badge #{order.locationOut}
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Return Station 
+                        span.badge #{order.locationIn}
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Pickup Date &nbsp;&nbsp;&nbsp;
+                        span.badge #{order.dateOut.toLocaleString('en-GB')}
+                    li(style="margin-top: 1px;margin-bottom: 1px;")
+                        |Return Date &nbsp;&nbsp;&nbsp;
+                        span.badge   #{order.dateIn.toLocaleString('en-GB')}
+    br
+    if (addAccessories.length>0)
+        panel
+            .panel-info
+                .panel-heading(style="color: blue;")
+                    |Selected Additional Options
+                .panel-body(style="color: black;")
+                    each acc, index in addAccessories
+                        ul( style="list-style-type: none; margin-top: 1px;margin-bottom: 1px;")
+                            li(style="margin-top: 1px;margin-bottom: 1px;")
+                                span.badge #{acc.Name}
+        br                        
+
+
+    panel
+        .panel-info
+            .panel-heading(style="color: blue;")
+                |Your Remarks:
+            .panel-body
+                | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  #{order.remarks}
+
+    br
+    .block.label(style="ffont-size:18px; color: blue") Total Order Price: #{order.vehiclePrice} ₪
+        
+    
+
+    script(type='text/javascript') var g_order =!{JSON.stringify(order)}
+    

@@ -1,0 +1,44 @@
+<nav role="navigation" class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="navbar-toggle">
+                <span class="sronly"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/#" class="navbar-brand">Home</a>
+        </div>
+        <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+            <div ng-if="(data.user)">
+                <ul class="nav navbar-nav" id="navBarUl">
+                    <li><p class="nav navbar-text">{{data.user.username}}</p></li>
+                    <li><a href="/logout">Logout</a></li>
+                    <li ng-hide="(data.screenName==='history')"><a href="/history">My Orders</a></li>
+                    <li><a href="/help">Help</a></li>
+                </ul>
+            </div>
+            <div ng-if="(!data.user)">
+                <ul class="nav navbar-nav" id="navBarUl">
+                    <li ng-hide="(data.screenName==='login')"><a href="/login">Login</a></li>
+                    <li ng-hide ="(data.screenName==='register')"><a href="/Register">Register</a></ling-hide>
+                    <li><a href="/help">Help</a></li>
+                </ul>
+            </div>
+            <div ng-if="(data.screenName==='vclList')">
+                <form style="color:grey;" class="navbar-form pull-left">
+                    items on the page <select name="itemsOnPage" id="itemsOnPage" onchange="itemsOnPageChanged()" style="width: 70px;" class="form-control">
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>   
+                    order by <select name="orderBy" id="orderBy" onchange="orderByChanged()" style="width: 120px;" class="form-control">
+                        <option selected="true">Price</option>
+                        <option>maker+model </option>
+                    </select>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</nav>

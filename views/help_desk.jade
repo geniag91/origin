@@ -1,0 +1,48 @@
+﻿extends layout
+
+block content
+    nav(class='navbar navbar-default', role='navigation')
+        .container-fluid
+            .navbar-header
+                button(class='navbar-toggle', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                    span.sronly
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a(class='navbar-brand', href='/#') Home
+            #bs-example-navbar-collapse-1(class='collapse navbar-collapse')
+                #navBarUl.ul(class='nav navbar-nav')
+                    if (!user)
+                        li
+                            a(href='/login') Login
+                        li
+                            a(href='/register') Register
+                    if (user)
+                        li
+                            <p class="nav navbar-text">Logged in as #{user.username}</p>
+                        li
+                            a(href="/history") My Orders
+                        li
+                            a(href="/logout") Logout
+    .wrap
+    h4.h4 &nbsp;&nbsp;&nbsp; Ask us a question
+    .container-fluid
+
+        .panel-default(style='margin-top: 10px; margin-bottom: 10px;')
+            .container-fluid
+                #messages(style='margin-top: 10px; margin-bottom: 10px;')
+
+        .push
+    .footer
+    .container-fluid
+        .panel-default(style='margin-top: 10px; margin-bottom: 10px;')
+            .row
+                .col-xs-8.col-sm-9
+                    input(type="text" id="message-box" class="form-control input-lg" placeholder="Write a message here..." rows="3" style='margin-top: 5px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px;')
+                .col-xs-4.col-sm-3
+                    button#send-message-btn.btn.btn-primary.btn-lg.btn-block(style='float: right; margin-top: 5px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px;') Send Message
+
+    script(src='https://cdn.socket.io/socket.io-1.4.5.js')
+    script(type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js')
+    script(type='text/javascript' src='/js/help_desk_client.js')
+

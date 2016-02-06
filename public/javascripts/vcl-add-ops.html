@@ -1,0 +1,12 @@
+﻿<panel> 
+    <div class="panel-default">
+        <div class="panel-body">
+            <input id="chk{{$index}}" type="checkbox" name="chk{{$index}}" ng-disabled="(data.order) &amp;&amp; !laterThanNow(data.order.dateOut)" ng-checked="setAccessory(acc.Name)" class="checkBox">
+                <label for="chk{{$index}}" style="color: black;" class="nameLabel">
+                    <span class="badge">{{acc.Name}}</span>
+                </label>
+            <div style="float: right;margin-top: 0px; margin-bottom: 3px;" class="block badge priceLabel">{{acc.Daily_Price}} ₪ </div>
+        </div>
+    </div>
+</panel>
+
