@@ -77,14 +77,14 @@ mongoose.connect(process.env.mongoPath, function (err, db) {
 
 console.log('mongo connected');
 
-var date = new Date(Date.UTC(2012, 11, 20, 15, 0, 0));
-console.log(date.toLocaleString('en-GB'));
+//var date = new Date(Date.UTC(2012, 11, 20, 15, 0, 0));
+//console.log(date.toLocaleString('en-GB'));
 
-var x = new Date();
-//var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60;
-//x.setHours(x.getHours() - currentTimeZoneOffsetInHours);
-console.log(x.getLocalDate().getDateStr());
-console.log(x.toISOString().replace('T', ' ').substr(0, 19));
+//var x = new Date();
+////var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60;
+////x.setHours(x.getHours() - currentTimeZoneOffsetInHours);
+//console.log(x.getLocalDate().getDateStr());
+//console.log(x.toISOString().replace('T', ' ').substr(0, 19));
 
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
