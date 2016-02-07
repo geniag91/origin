@@ -12,7 +12,12 @@ global.io;
 global.socket;
 
 //DISPLAY MAIN SEARCH SCREEN
-router.get('/', isAuthenticated, function (req, res) {
+//router.get('/', isAuthenticated, function (req, res) {
+//    res.render('index');
+//});
+
+//DISPLAY MAIN SEARCH SCREEN
+router.get('/', function (req, res) {
     res.render('index');
 });
 
