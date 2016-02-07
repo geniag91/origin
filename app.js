@@ -83,7 +83,6 @@ console.log(date.toLocaleString('en-GB'));
 var x = new Date();
 //var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60;
 //x.setHours(x.getHours() - currentTimeZoneOffsetInHours);
-
 console.log(x.getLocalDate().getDateStr());
 console.log(x.toISOString().replace('T', ' ').substr(0, 19));
 

@@ -741,8 +741,6 @@ function buildCriteriaFromOrder(order) {
     return criteria;
 }
 
-
-
 //parse vehicle search criteria that comes from the vehicles list
 function parseVehicleDescription(vehicleDescr){
     //KIA; PICANTO; 2015; 1200; AUTO; G; 5;
