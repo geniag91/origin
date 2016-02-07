@@ -43,12 +43,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+console.log('init mongoPath');
 
 process.env.mongoPath = "mongodb://mydb:pass1@ds027479.mongolab.com:27479/mydb";
 process.env.socketIOPort = "3001";
 //process.env.myUrl ="http://socketd.azurewebsites.net/";
-process.env.myUrl ="ec2-54-88-233-131.compute-1.amazonaws.com/";
+process.env.myUrl = "ec2-54-88-233-131.compute-1.amazonaws.com/";
+
+console.log('mongo ' + process.env.mongoPath );
+
 // mongoose
 //mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
 //mongoose.connection.once("open", function () {
@@ -71,6 +74,8 @@ mongoose.connect(process.env.mongoPath, function (err, db) {
         console.warn(err.message);
     }
 });
+
+console.log('mongo connected' );
 
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
