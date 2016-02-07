@@ -1,10 +1,10 @@
 ﻿//var socket = io.connect('http://localhost:3000');
 //var io = require('socket.io-client');
-var socket;//= io.connect('http://socketd.azurewebsites.net:3001',{ reconnect: true});//, {'connect timeout': 5000});
+var socket;//= io.connect('http://ec2-54-88-233-131.compute-1.amazonaws.com:3001',{ reconnect: true});//, {'connect timeout': 5000});
 
 $(document).ready(function () {
     //if (!socket) {
-     socket = io.connect('http://socketd.azurewebsites.net:3001');
+     socket = io.connect('http://ec2-54-88-233-131.compute-1.amazonaws.com:3001');
         //socket.on('helloBack', function (data) {
         //    $("#returnMessageLabel").text(data.message);
     //};

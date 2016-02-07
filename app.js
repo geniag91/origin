@@ -15,6 +15,15 @@ var routes = require('./routes/index');
 
 var app = express();
 
+//init paths and ports
+//process.env.mongoPath = "mongodb://localhost:27017/myDb";
+process.env.PORT = '3000';
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -34,11 +43,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//init paths and ports
-//process.env.mongoPath = "mongodb://localhost:27017/myDb";
+
+
 process.env.mongoPath = "mongodb://mydb:pass1@ds027479.mongolab.com:27479/mydb";
 process.env.socketIOPort = "3001";
-process.env.myUrl ="http://socketd.azurewebsites.net/";
+//process.env.myUrl ="http://socketd.azurewebsites.net/";
+process.env.myUrl ="ec2-54-88-233-131.compute-1.amazonaws.com/";
 // mongoose
 //mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
 //mongoose.connection.once("open", function () {
