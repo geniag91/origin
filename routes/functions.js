@@ -25,6 +25,18 @@ module.exports = {
     getOrder : getOrder
 };
 
+Date.prototype.getLocalDate = function () {
+    var x = new Date();
+    x = this;
+    var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60;
+    this.setHours(x.getHours() - currentTimeZoneOffsetInHours);
+    return x;
+}
+
+Date.prototype.getDateStr = function () {
+    return this.toISOString().replace('T', ' ').substr(0, 19);
+}
+
 Date.prototype.daysDiff = function (anotherDate) {
     
     // Copy date parts of the timestamps, discarding the time parts.
@@ -137,8 +149,11 @@ function getVehicleSearchFilter(vehcategory, fromDate, toDate, vehicleNumbers, i
     var fields = getVehicleSearchFields();
     
 
-    var searchCriteria = dateFrom.toLocaleString('en-GB') 
-        + ' - ' + dateTo.toLocaleString('en-GB') + '. ';
+    //var searchCriteria = dateFrom.toLocaleString('en-GB') 
+    //    + ' - ' + dateTo.toLocaleString('en-GB') + '. ';
+    
+    var searchCriteria = dateFrom.getLocalDate().getDateStr()
+        + ' - ' + dateTo.getLocalDate().getDateStr() + '. ';
 
     searchCriteria = searchCriteria + ' Pick up: ' + locationFrom + '. ';
     searchCriteria = searchCriteria + ' Return: ' + locationTo + '. ';
@@ -712,8 +727,12 @@ function parseCriteria(criteria){
 function buildCriteriaFromOrder(order) {
     //11/17/2015, 8:00:00 AM - 11/18/2015, 8:00:00 AM. Pick up: Tel Aviv. Return: Tel Aviv. Category: *. Driver age: 27+.
     //11/24/2015, 8:00:00 AM.11/29/2015, 8:00:00 AM. Pick up: Tel Aviv. Return: Tel Aviv. Category: ECONOMY. Driver age: 27+. 
-    var criteria = order.dateOut.toLocaleString('en-GB') +'-';
-    criteria += order.dateIn.toLocaleString('en-GB') + '.';
+    x.getLocalDate(x).getDateStr()
+    //var criteria = order.dateOut.toLocaleString('en-GB') + '-';
+    //criteria += order.dateIn.toLocaleString('en-GB') + '.';
+
+    var criteria = order.dateOut.getLocalDate().getDateStr() + '-';
+    criteria += order.dateIn.getLocalDate().getDateStr() + '.';
     criteria += ' Pick up: ' + order.locationOut + '.';
     criteria += ' Return: ' + order.locationIn + '.';
     criteria += ' Category: ' + order.CAR_CATEGORY + '.';

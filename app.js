@@ -80,18 +80,12 @@ console.log('mongo connected');
 var date = new Date(Date.UTC(2012, 11, 20, 15, 0, 0));
 console.log(date.toLocaleString('en-GB'));
 
-var options = {
-    year: "numeric", month: "numeric",
-    day: "numeric", hour: "numeric", hour12: false, minute:"numeric"
-};
+var x = new Date();
+//var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60;
+//x.setHours(x.getHours() - currentTimeZoneOffsetInHours);
 
-// Using I18N toLocaleString
-console.log(date.toLocaleString('en-GB', options));
-console.log(date.toLocaleString("en-US", options));
-console.log(date.toLocaleString("ja-JP", options));
-console.log(date.toLocaleString("ar-SA", options));
-console.log(date.toLocaleString("hi-IN", options));
-
+console.log(x.getLocalDate().getDateStr());
+console.log(x.toISOString().replace('T', ' ').substr(0, 19));
 
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
