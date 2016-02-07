@@ -6,8 +6,8 @@
         //directives: 'http://localhost:1337/javascripts/'
         //images: 'http://socketd.azurewebsites.net/images/', 
         //directives: 'http://socketd.azurewebsites.net/javascripts/'
-        images: 'http://ec2-54-88-233-131.compute-1.amazonaws.com/images/', 
-        directives: 'http://ec2-54-88-233-131.compute-1.amazonaws.com/javascripts/'
+        images: 'http://ec2-54-88-233-131.compute-1.amazonaws.com:3000/images/', 
+        directives: 'http://ec2-54-88-233-131.compute-1.amazonaws.com:3000/javascripts/'
     });
 
     app.controller('HomeController', ['$scope','$http', function($scope, $http, paths ){
