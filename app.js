@@ -75,7 +75,23 @@ mongoose.connect(process.env.mongoPath, function (err, db) {
     }
 });
 
-console.log('mongo connected' );
+console.log('mongo connected');
+
+var date = new Date(Date.UTC(2012, 11, 20, 15, 0, 0));
+console.log(date.toLocaleString('en-GB'));
+
+var options = {
+    year: "numeric", month: "numeric",
+    day: "numeric", hour: "numeric", hour12: false, minute:"numeric"
+};
+
+// Using I18N toLocaleString
+console.log(date.toLocaleString('en-GB', options));
+console.log(date.toLocaleString("en-US", options));
+console.log(date.toLocaleString("ja-JP", options));
+console.log(date.toLocaleString("ar-SA", options));
+console.log(date.toLocaleString("hi-IN", options));
+
 
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
