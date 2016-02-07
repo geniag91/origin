@@ -42,6 +42,7 @@ Date.prototype.daysDiff = function (anotherDate) {
     // Copy date parts of the timestamps, discarding the time parts.
     //var one = new Date(first.getFullYear(), first.getMonth(), first.getDate());
     //var two = new Date(second.getFullYear(), second.getMonth(), second.getDate());
+
     // Do the math.
     var millisecondsPerDay = 1000 * 60 * 60 * 24;
     var millisBetween = anotherDate.getTime() - this.getTime();
@@ -726,7 +727,7 @@ function parseCriteria(criteria){
 function buildCriteriaFromOrder(order) {
     //11/17/2015, 8:00:00 AM - 11/18/2015, 8:00:00 AM. Pick up: Tel Aviv. Return: Tel Aviv. Category: *. Driver age: 27+.
     //11/24/2015, 8:00:00 AM.11/29/2015, 8:00:00 AM. Pick up: Tel Aviv. Return: Tel Aviv. Category: ECONOMY. Driver age: 27+. 
-    x.getLocalDate(x).getDateStr()
+    //x.getLocalDate(x).getDateStr()
     //var criteria = order.dateOut.toLocaleString('en-GB') + '-';
     //criteria += order.dateIn.toLocaleString('en-GB') + '.';
 
