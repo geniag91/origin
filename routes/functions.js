@@ -153,7 +153,7 @@ function getVehicleSearchFilter(vehcategory, fromDate, toDate, vehicleNumbers, i
     //    + ' - ' + dateTo.toLocaleString('en-GB') + '. ';
     
     var searchCriteria = dateFrom.getLocalDate().getDateStr()
-        + ' - ' + dateTo.getLocalDate().getDateStr() + '. ';
+        + ' -- ' + dateTo.getLocalDate().getDateStr() + '. ';
 
     searchCriteria = searchCriteria + ' Pick up: ' + locationFrom + '. ';
     searchCriteria = searchCriteria + ' Return: ' + locationTo + '. ';
@@ -699,8 +699,8 @@ function parseCriteria(criteria){
     var tmp = criteria.split('.');
     tmp[0] = tmp[0].replace('Vehicles available for dates ', '')
     //dates
-    var dateFrom = new Date( tmp[0].split('-')[0].trim());
-    var dateTo = new Date(tmp[0].split('-')[1].trim());
+    var dateFrom = new Date( tmp[0].split('--')[0].trim());
+    var dateTo = new Date(tmp[0].split('--')[1].trim());
 
     //Pick up
     var pickupCar = tmp[1].replace(' Pick up: ', '').trim();
