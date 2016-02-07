@@ -44,6 +44,19 @@ Date.prototype.daysDiff=function(anotherDate) {
     return Math.ceil(days);
 }
 
+Date.prototype.getLocalDate = function () {
+    var x = new Date();
+    
+    var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60;
+    x = this;
+    this.setHours(x.getHours() - currentTimeZoneOffsetInHours);
+    return x;
+}
+
+Date.prototype.getDateStr = function () {
+    return this.toISOString().replace('T', ' ').substr(0, 19);
+}
+
 Array.prototype.itemByProp = function arrayObjectIndexOf(property, value) {
     for (var i = 0, len = this.length; i < len; i++) {
         if (this[i][property] === $.trim(value)) return this[i];

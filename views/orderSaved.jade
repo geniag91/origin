@@ -76,10 +76,10 @@ block content
                                                         span.badge #{order.locationIn}
                                                     li(style="margin-top: 1px;margin-bottom: 1px;")
                                                         |Pickup Date &nbsp;&nbsp;&nbsp;
-                                                        span.badge #{order.dateOut.toLocaleString('en-GB')}
+                                                        span.badge #{order.dateOut.getLocalDate().getDateStr()}
                                                     li(style="margin-top: 1px;margin-bottom: 1px;")
                                                         |Return Date &nbsp;&nbsp;&nbsp;
-                                                        span.badge   #{order.dateIn.toLocaleString('en-GB')}
+                                                        span.badge   #{order.dateIn.getLocalDate().getDateStr()}
                 if (addAccessories.length>0)
                     .row
                         .col-xs-8.col-sm-8.col-md-8.col-lg-8
