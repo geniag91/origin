@@ -37,7 +37,7 @@ module.exports.listen = function (app, server, currUser, io) {
             var stream = Help_chat.find(filter).limit(10).stream();
             console.log('after Help_chat.find');
             stream.on('data', function (chat) {
-                console.log('emitting chat');
+                console.log('emitting chat' + chat.message);
                 io.sockets.connected[sockId].emit('chat', chat.message + (chat.isUser === 1 ? '~~~1~~~' : ''));
                 console.log('io.sockets.connected[sockId].emit');
             });

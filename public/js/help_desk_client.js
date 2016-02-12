@@ -8,7 +8,6 @@ $(document).ready(function () {
         //socket.on('helloBack', function (data) {
         //    $("#returnMessageLabel").text(data.message);
     //};
-
     var navBarText = document.getElementById("navBarUl").textContent;
     if (navBarText.toUpperCase().indexOf("LOGGED IN AS ") > -1) {
         var emlStart = navBarText.toUpperCase().indexOf("LOGGED IN AS ") + 13;
