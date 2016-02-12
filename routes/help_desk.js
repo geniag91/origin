@@ -7,10 +7,10 @@ var lastChat = '';
 module.exports.listen = function (app, server, currUser, io) {
 
     //if (!io){
-        io = socketio(server);
-        io.listen(process.env.socketIOPort, function () {
-            console.log('Socket.io listening on port ' + process.env.socketIOPort);
-        });
+    io = socketio(server);
+    io.listen(process.env.socketIOPort, function () {
+        console.log('Socket.io listening on port ' + process.env.socketIOPort);
+    });
     //}
 
     io.on('connection', function (socket) {
@@ -35,9 +35,11 @@ module.exports.listen = function (app, server, currUser, io) {
         
             // if there are messages earlier in thr last hour, display them
             var stream = Help_chat.find(filter).limit(10).stream();
+            console.log('after Help_chat.find');
             stream.on('data', function (chat) {
                 console.log('emitting chat');
                 io.sockets.connected[sockId].emit('chat', chat.message + (chat.isUser === 1 ? '~~~1~~~' : ''));
+                console.log('io.sockets.connected[sockId].emit');
             });
             msgsDispalyed = 1;
         }
@@ -64,7 +66,7 @@ module.exports.listen = function (app, server, currUser, io) {
                         console.warn(err.message);
                     }
                     else {
-                        console.warn('message saved');
+                        console.warn('message saved: ' + mssg);
                         if (callback) {
                             callback();
                         }
@@ -77,12 +79,14 @@ module.exports.listen = function (app, server, currUser, io) {
             function onSaveMyMsg() {
                 console.log('onSaveMyMsg');
                 io.sockets.connected[sockId].emit('chat', msg + ' my answer');
+                console.log('sockId' + sockId);
             }
         });
 
         socket.on('join', function (data) {
             console.log('join');
             socket.join(data.email); // We are using room of socket io
+            console.log('data.email: ' + data.email);
         });
 
         socket.on('disconnect', function () {
