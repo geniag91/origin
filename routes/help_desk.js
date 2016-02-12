@@ -9,7 +9,7 @@ module.exports.listen = function (app, server, currUser, io) {
     //if (!io){
         io = socketio(server);
         io.listen(process.env.socketIOPort, function () {
-            console.log('Express server listening on port' + process.env.socketIOPort);
+            console.log('Socket.io listening on port ' + process.env.socketIOPort);
         });
     //}
 
@@ -21,9 +21,16 @@ module.exports.listen = function (app, server, currUser, io) {
         var dt = new Date();
         dt = dt.dateAdd('hour', -1)
         var filter = {};
+
+        console.log('before pulling saved msgs');
+
         if (currUser && msgsDispalyed===0){
-            
+            console.log('pulling saved msgs');
+
             io.sockets.connected[sockId].emit('chat', 'Hello, ' + currUser.username);
+
+            console.log('io.sockets.connected');
+
             filter['msg_date'] = { $gte : dt };
             filter['user'] = currUser.username;
         
@@ -38,8 +45,10 @@ module.exports.listen = function (app, server, currUser, io) {
         
         io.sockets.connected[sockId].on('chat',function(msg) {
             //io.sockets.in(currUser.username).on('chat',function(msg) {
+            console.log('io.sockets.connected');
 
-            if (lastChat==='' || lastChat.toUpperCase().trim()!=msg.toUpperCase().trim()) {
+            if (lastChat === '' || lastChat.toUpperCase().trim() != msg.toUpperCase().trim()) {
+                console.log('before saveChat');
                 saveChat(msg, 1);
                 saveChat(msg + ' my answer', 0, onSaveMyMsg);
                 
@@ -48,6 +57,7 @@ module.exports.listen = function (app, server, currUser, io) {
             }
 
             function saveChat(mssg, isUserMsg, callback) {
+                console.log('saveChat');
                 var chat = new Help_chat({ user: currUser.username, message: mssg, msg_date: new Date(), isUser: isUserMsg });
                     
                 chat.save(function (err) {
@@ -66,11 +76,13 @@ module.exports.listen = function (app, server, currUser, io) {
             }
                 
             function onSaveMyMsg() {
+                console.log('onSaveMyMsg');
                 io.sockets.connected[sockId].emit('chat', msg + ' my answer');
             }
         });
 
         socket.on('join', function (data) {
+            console.log('join');
             socket.join(data.email); // We are using room of socket io
         });
 
