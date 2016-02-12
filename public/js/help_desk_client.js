@@ -4,7 +4,7 @@ var socket;//= io.connect('http://ec2-54-88-233-131.compute-1.amazonaws.com:3001
 
 $(document).ready(function () {
     //if (!socket) {
-     socket = io.connect('http://ec2-54-88-233-131.compute-1.amazonaws.com:3001');
+     socket = io.connect('http://ec2-54-88-233-131.compute-1.amazonaws.com:4000');
         //socket.on('helloBack', function (data) {
         //    $("#returnMessageLabel").text(data.message);
     //};
