@@ -6,12 +6,12 @@ var lastChat = '';
 
 module.exports.listen = function (app, server, currUser, io) {
 
-    //if (!io){
-    io = socketio(server);
-    io.listen(process.env.socketIOPort, function () {
-        console.log('Socket.io listening on port ' + process.env.socketIOPort);
-    });
-    //}
+    if (!io){
+        io = socketio(server);
+        io.listen(process.env.socketIOPort, function () {
+            console.log('Socket.io listening on port ' + process.env.socketIOPort);
+        });
+    }
 
     io.on('connection', function (socket) {
         var sockId = socket.id;
