@@ -523,7 +523,7 @@ function updateOrder(req, res, selectedOrder, cancel, addOppsStr, remarks) {
                     displaySavedOrder(req, res, ordrs, vehs[0]);
                 });
             });
-        }
+        }                          
     });
 }
 

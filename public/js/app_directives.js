@@ -2,8 +2,8 @@
     var app = angular.module('angHome', []);
 
     app.constant('paths', {
-        //images: 'http://localhost:1337/images/', 
-        //directives: 'http://localhost:1337/javascripts/'
+        //images: 'http://localhost:3000/images/', 
+        //directives: 'http://localhost:3000/javascripts/'
         //images: 'http://socketd.azurewebsites.net/images/', 
         //directives: 'http://socketd.azurewebsites.net/javascripts/'
         images: 'http://ec2-54-88-233-131.compute-1.amazonaws.com:3000/images/', 

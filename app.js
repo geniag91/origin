@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 console.log('init mongoPath');
 
 process.env.mongoPath = "mongodb://mydb:pass1@ds027479.mongolab.com:27479/mydb";
-process.env.socketIOPort = "3001";
+process.env.socketIOPort = "4000";
 //process.env.myUrl ="http://socketd.azurewebsites.net/";
 process.env.myUrl = "ec2-54-88-233-131.compute-1.amazonaws.com/";
 
