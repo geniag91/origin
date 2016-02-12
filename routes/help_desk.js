@@ -15,7 +15,7 @@ module.exports.listen = function (app, server, currUser, io) {
 
     io.on('connection', function (socket) {
         var sockId = socket.id;
-        console.log('a user connected');
+        console.log('a user connected : '+ currUser.username );
         //msgsDispalyed = 0;
         var dt = new Date();
         dt = dt.dateAdd('hour', -1)
@@ -58,7 +58,7 @@ module.exports.listen = function (app, server, currUser, io) {
             }
 
             function saveChat(mssg, isUserMsg, callback) {
-                console.log('saveChat');
+                console.log('saveChat. currUser: ' + currUser.username);
                 var chat = new Help_chat({ user: currUser.username, message: mssg, msg_date: new Date(), isUser: isUserMsg });
                     
                 chat.save(function (err) {
