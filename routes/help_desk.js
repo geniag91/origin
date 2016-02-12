@@ -13,7 +13,6 @@ module.exports.listen = function (app, server, currUser, io) {
         });
     //}
 
-
     io.on('connection', function (socket) {
         var sockId = socket.id;
         console.log('a user connected');
