@@ -158,7 +158,7 @@ router.get('/register', function (req, res) {
 router.post('/register', function (req, res) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function (err, account) {
         if (err) {
-            return res.render("register", { info: "Sorry. That username already exists. Try again." });
+            return res.render('register', { info: "Sorry. That username already exists. Try again." });
         }
         
         passport.authenticate('local')(req, res, function () {
@@ -176,14 +176,41 @@ router.get('/login', function (req, res) {
     res.render('login');
 });
 
-router.post('/login', passport.authenticate('local'), function (req, res) {
-    //res.redirect('/');
-    var redir = req.session.returnTo;
-    if (redir.indexOf('/login') > -1) {
-        redir = '/';
-    }
-    res.redirect(redir || '/');
-    delete req.session.returnTo;
+//router.post('/login', passport.authenticate('local', {failureRedirect:'/login'}), function (req, res) {
+
+//    var redir = req.session.returnTo;
+//    if (redir.indexOf('/login') > -1) {
+//        redir = '/';
+//    }
+//    res.redirect(redir || '/');
+//    delete req.session.returnTo;
+//});
+
+router.post('/login', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
+            return next(err);
+        }
+        // Redirect if it fails
+        if (!user) {
+            //return res.redirect('/login');
+            return res.render('login', {info:'Invalid username or password.'});
+        }
+        req.logIn(user, function (err) {
+            if (err) {
+                return next(err);
+            }
+
+            var redir = req.session.returnTo;
+            if (redir.indexOf('/login') > -1) {
+                redir = '/';
+            }
+            res.redirect(redir || '/');
+            delete req.session.returnTo;
+
+            //return res.redirect('/users/' + user.username);
+        });
+    })(req, res, next);
 });
 
 router.get('/logout', function (req, res) {
