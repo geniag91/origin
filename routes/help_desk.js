@@ -34,7 +34,7 @@ module.exports.listen = function (app, server, currUser, io) {
             filter['user'] = currUser.username;
         
             // if there are messages earlier in thr last hour, display them
-            var stream = Help_chat.find(filter).limit(10).stream();
+            var stream = Help_chat.find(filter).sort('msg_date', -1).limit(10).stream();
             console.log('after Help_chat.find');
             stream.on('data', function (chat) {
                 console.log('emitting chat' + chat.message);
