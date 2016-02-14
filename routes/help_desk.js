@@ -3,8 +3,10 @@ var Help_chat = require('../models/help_chat');
 var msgsDispalyed=0;
 var chatDispalyed = 0;
 var lastChat = '';
+var currentUser;
 
 module.exports.listen = function (app, server, currUser, io) {
+    currentUser = currUser;
 
     if (!io){
         io = socketio(server);
@@ -23,16 +25,16 @@ module.exports.listen = function (app, server, currUser, io) {
 
         console.log('before pulling saved msgs');
 
-        if (currUser && msgsDispalyed===0){
+        if (currentUser && msgsDispalyed===0){
             console.log('pulling saved msgs');
 
-            io.sockets.connected[sockId].emit('chat', 'Hello, ' + currUser.username);
+            io.sockets.connected[sockId].emit('chat', 'Hello, ' + currentUser.username);
 
             console.log('io.sockets.connected');
 
             filter['msg_date'] = { $gte : dt };
-            filter['user'] = currUser.username;
-        
+            filter['user'] = currentUser.username;
+           //Help_chat.remove().exec();
             // if there are messages earlier in thr last hour, display them
             var stream = Help_chat.find(filter).sort('msg_date').stream();
      
@@ -41,8 +43,10 @@ module.exports.listen = function (app, server, currUser, io) {
                 console.log('emitting chat' + chat.message);
                 io.sockets.connected[sockId].emit('chat', chat.message + (chat.isUser === 1 ? '~~~1~~~' : ''));
                 console.log('io.sockets.connected[sockId].emit');
+                
             });
             msgsDispalyed = 1;
+            
         }
         
         io.sockets.connected[sockId].on('chat',function(msg) {
@@ -50,36 +54,44 @@ module.exports.listen = function (app, server, currUser, io) {
             console.log('io.sockets.connected');
 
             if (lastChat === '' || lastChat.toUpperCase().trim() != msg.toUpperCase().trim()) {
-
-                if (currUser) {
+                if (currentUser) {
                     console.log('before saveChat');
-                    saveChat(msg, 1);
-                    saveChat(msg + ' my answer', 0, onSaveMyMsg);
+                    
+                    var dt2 = new Date();
+                    saveChat(msg, 1, dt2);
+                    dt2 = dt2.dateAdd('second', 1)
+                    saveChat(msg + ' my answer', 0, dt2, onSaveMyMsg);
+                    
+                    //chatDispalyed = 1;
+                    
                 }
                 else {
                     onSaveMyMsg();
                 }
-                chatDispalyed = 1;
+
                 lastChat = msg;
             }
 
-            function saveChat(mssg, isUserMsg, callback) {
-                console.log('saveChat. currUser: ' + currUser.username);
-                var chat = new Help_chat({ user: currUser.username, message: mssg, msg_date: new Date(), isUser: isUserMsg });
-                    
-                chat.save(function (err) {
-                    if (err) {
-                        console.warn(err.message);
-                    }
-                    else {
-                        console.warn('message saved: ' + mssg);
-                        if (callback) {
-                            callback();
+            function saveChat(mssg, isUserMsg, dt, callback) {
+                
+                    console.log('saveChat. currUser: ' + currentUser.username);
+                    var chat = new Help_chat({ user: currentUser.username, message: mssg, msg_date: dt, isUser: isUserMsg });
+                
+                    chat.save(function (err) {
+                        if (err) {
+                            console.warn(err.message);
                         }
-                    }
-                //io.sockets.connected[sockId].emit('chat', msg);
-                //io.sockets.in(currUser.username).emit('chat', { msg: msg });
-                });
+                        else {
+                            console.warn('message saved: ' + mssg);
+                            if (callback) {
+                                callback();
+                            }
+                        }
+                    //io.sockets.connected[sockId].emit('chat', msg);
+                    //io.sockets.in(currUser.username).emit('chat', { msg: msg });
+                    });
+
+           
             }
                 
             function onSaveMyMsg() {
