@@ -162,8 +162,14 @@ router.post('/register', function (req, res) {
         }
         
         passport.authenticate('local')(req, res, function () {
-            //res.redirect('/');
-            res.redirect(req.session.returnTo || '/');
+            ////res.redirect('/');
+            //res.redirect(req.session.returnTo || '/');
+            //delete req.session.returnTo;
+            var redir = req.session.returnTo;
+            if (redir.indexOf('/login') > -1) {
+                redir = '/';
+            }
+            res.redirect(redir || '/');
             delete req.session.returnTo;
         });
     });
