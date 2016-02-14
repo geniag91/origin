@@ -50,14 +50,15 @@ module.exports.listen = function (app, server, currUser, io) {
             console.log('io.sockets.connected');
 
             if (lastChat === '' || lastChat.toUpperCase().trim() != msg.toUpperCase().trim()) {
-                if (currUser) {
+
+                //if (currUser) {
                     console.log('before saveChat');
                     saveChat(msg, 1);
                     saveChat(msg + ' my answer', 0, onSaveMyMsg);
-                }
-                else {
-                    onSaveMyMsg();
-                }
+                //}
+                //else {
+                //    onSaveMyMsg();
+                //}
                 //chatDispalyed = 1;
                 lastChat = msg;
             }
