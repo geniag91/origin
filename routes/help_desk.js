@@ -15,7 +15,7 @@ module.exports.listen = function (app, server, currUser, io) {
 
     io.on('connection', function (socket) {
         var sockId = socket.id;
-        console.log('a user connected : '+ currUser.username );
+        //console.log('a user connected : '+ currUser.username );
         //msgsDispalyed = 0;
         var dt = new Date();
         dt = dt.dateAdd('hour', -1)
