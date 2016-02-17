@@ -14,9 +14,9 @@ block content
                         .div(ng-if="(!data.order)")
                             |  &nbsp; Vehicles Order for dates  
 
-                        #criteriaLabel.label.label-warning(name='criteria')
+                        #criteriaLabel.alert-inline.alert-warning(name='criteria')
                             | &nbsp;
-                            span {{data.searchCriteria}}
+                            span(style='margin-left:5px;margin-right:5px;') {{data.searchCriteria}}
                             | &nbsp; 
 
                 form(id='formVclDetails', role='form', name="", style='max-width: 900px;' )

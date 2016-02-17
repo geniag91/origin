@@ -11,8 +11,8 @@ block content
             #criteriaPanel.panel.panel-info(class="panelCriteria")
                     #criteriaHeader
                         |Vehicles available for 
-                        #criteriaLabel.label.label-warning(name='criteria')
-                            span {{data.searchCriteria}}
+                        #criteriaLabel.alert-inline.alert-warning(name='criteria')
+                            span#criteriaSpan(style='margin-left:5px;margin-right:5px;') {{data.searchCriteria}}
 
             form(id='formVclList', role='form', action="/vclList/selected",method="post", name="", style='max-width: 900px;')
                 
